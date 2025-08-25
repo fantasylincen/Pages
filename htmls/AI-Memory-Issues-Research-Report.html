@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI记忆问题深度研究报告</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6e8efb, #a777e3);
+            --secondary-gradient: linear-gradient(135deg, #8e2de2, #4a00e0);
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --light-text: #666;
+            --accent-color: #8e44ad;
+            --border-color: #e0e0e0;
+            --card-bg: #ffffff;
+            --section-spacing: 3rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding-top: 60px;
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: var(--section-spacing);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-container {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: var(--section-spacing);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box {
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        ul, ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .stat-container h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            h3 {
+                font-size: 1.35rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <div class="logo">AI记忆研究</div>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="#intro">研究背景</a></li>
+                <li><a href="#symptoms">问题表现</a></li>
+                <li><a href="#causes">技术根源</a></li>
+                <li><a href="#solutions">解决方案</a></li>
+                <li><a href="#conclusion">结论展望</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>AI记忆问题研究报告</h1>
+            <p>现状、挑战与解决方案</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="intro" class="section">
+            <h2>一、AI记忆问题的重要性与背景</h2>
+            <p>在AI技术迅猛发展的当下，AI系统在众多领域得到广泛应用，从智能客服、内容创作到复杂的工业流程优化、医疗诊断辅助等。然而，AI的记忆问题逐渐成为制约其进一步发展和深度应用的关键因素。</p>
+            
+            <div class="highlight-box">
+                <p>以常见的聊天机器人为例，在与用户进行多轮复杂对话时，常常出现"失忆"现象。如在讨论一个技术项目时，前期已明确项目的目标和关键限制条件，但在后续对话中，AI却似乎忘记了这些信息，给出与之前设定相悖的建议或重复询问已解答的问题，导致对话无法连贯进行，用户体验极差。</p>
+            </div>
+            
+            <p>这种记忆缺陷不仅影响了简单交互场景，在复杂的专业领域，如软件开发中，AI编程助手因记不住项目整体架构、已实现的功能细节，会产生代码风格不一致、重复开发等问题，严重降低开发效率，增加项目成本和风险。</p>
+            
+            <p>AI记忆问题的根源在于其与人类记忆系统的本质差异。人类拥有复杂而精妙的记忆体系，包括短期记忆、长期记忆以及高效的记忆检索和整合机制，能根据不同情境灵活调用记忆。而AI的"记忆"在传统设计中多依赖于有限的上下文窗口，早期信息易被新内容挤出而"遗忘"，无法像人类一样形成持久、可随时回溯调用的记忆存储。</p>
+        </section>
+
+        <section id="symptoms" class="section">
+            <h2>二、AI记忆问题的具体表现与影响</h2>
+            
+            <h3>2.1 表现形式</h3>
+            <ul>
+                <li><strong>对话中的前后不一致</strong>：在多轮对话场景中，AI无法记住之前交流的关键信息。例如，用户先告知AI自己的出行偏好是火车，在后续询问行程规划时，AI仍推荐飞机出行方案。</li>
+                <li><strong>任务执行的中断与重复</strong>：当AI执行复杂任务，尤其是涉及多步骤操作时，容易忘记已完成的任务阶段和既定的任务流程，导致重复工作或任务中断后无法继续。</li>
+                <li><strong>知识应用的错误关联</strong>：在面对需要综合运用多种知识的问题时，AI不能准确关联相关知识记忆，可能给出错误或不完整的答案。</li>
+            </ul>
+            
+            <div class="stat-container">
+                <h4>AI记忆问题影响调查</h4>
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+                <p>在因客服AI记忆问题导致体验不佳的用户中，约30%表示会减少使用相关企业的产品或服务。</p>
+            </div>
+            
+            <h3>2.2 对不同应用领域的影响</h3>
+            <div class="highlight-box">
+                <h4>客户服务领域</h4>
+                <p>严重影响用户体验，降低客户满意度。用户期望在与客服AI交互时能得到连贯、准确的回应，记忆缺失导致的混乱回答会让用户感到被忽视和不被理解，进而对使用该服务的企业产生负面印象，可能导致客户流失。</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>医疗健康领域</h4>
+                <p>可能引发严重后果。在医疗诊断辅助场景中，AI若忘记患者之前的病史、过敏信息或已进行的检查结果，可能给出错误的诊断建议或重复安排不必要的检查，威胁患者健康安全。</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>工业制造领域</h4>
+                <p>会造成生产效率下降和成本增加。在工业自动化流程中，AI控制的设备如果忘记生产参数设置或生产步骤顺序，可能导致产品质量缺陷、生产停滞，增加次品率和设备维护成本。</p>
+            </div>
+        </section>
+
+        <section id="causes" class="section">
+            <h2>三、AI记忆问题的技术根源分析</h2>
+            
+            <h3>3.1 模型架构与训练机制的局限</h3>
+            <ul>
+                <li><strong>上下文窗口的限制</strong>：当前主流的大语言模型（LLMs）等AI模型在处理输入时，依赖于固定大小的上下文窗口。例如，GPT-4在标准配置下的上下文窗口通常为一定数量的token（如8K-128K tokens），当对话或任务涉及的信息超出该窗口范围，早期信息就会被逐步挤出。</li>
+                <li><strong>参数共享与更新策略</strong>：在模型训练过程中，为了提高训练效率和泛化能力，通常采用参数共享机制。然而，当模型针对新任务或新数据进行微调时，参数的更新可能会覆盖之前学习到的与其他任务相关的知识，导致灾难性遗忘。</li>
+                <li><strong>缺乏记忆强化与巩固机制</strong>：与人类大脑能够通过重复学习、睡眠等方式强化记忆不同，现有的AI模型在训练完成后，缺乏有效的机制对已学习到的记忆进行巩固和强化。</li>
+            </ul>
+            
+            <h3>3.2 数据处理与存储方式的不足</h3>
+            <ul>
+                <li><strong>数据碎片化与缺乏结构化</strong>：AI系统处理的数据往往来源广泛且形式多样，在收集和预处理过程中，容易出现数据碎片化问题，导致AI在检索和利用这些数据作为记忆时，无法快速准确地获取所需信息。</li>
+                <li><strong>存储介质与访问速度的瓶颈</strong>：对于大规模的AI应用，数据存储量巨大。传统的存储介质（如硬盘）在数据访问速度上存在瓶颈，当AI需要快速调用大量记忆数据时，可能出现延迟，影响实时性应用的性能。</li>
+                <li><strong>缺乏有效的数据筛选与重要性排序</strong>：在海量数据中，并非所有数据对AI的决策和任务执行都具有同等重要性。但现有的数据处理流程往往缺乏有效的机制对数据进行筛选和按照重要性排序。</li>
+            </ul>
+        </section>
+
+        <section id="solutions" class="section">
+            <h2>四、现有解决方案的梳理与分析</h2>
+            
+            <h3>4.1 基于模型改进的方案</h3>
+            <div class="highlight-box">
+                <h4>记忆增强网络（MANs）</h4>
+                <p>通过在传统神经网络架构中引入外部记忆模块，如可读写的记忆矩阵，使模型能够存储和检索长期依赖信息。研究表明，在处理长文本对话任务时，采用MANs架构的模型相比传统模型，对话连贯性得分提高了15%-20%。</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>弹性权重巩固（EWC）</h4>
+                <p>这一方法受生物大脑记忆机制启发，旨在解决模型在微调过程中的灾难性遗忘问题。在医疗影像诊断模型的微调实验中，应用EWC方法后，模型在保持对新疾病诊断能力提升的同时，对原有常见疾病诊断准确率的下降幅度从30%降低到10%左右。</p>
+            </div>
+            
+            <h3>4.2 数据管理与存储优化方案</h3>
+            <div class="highlight-box">
+                <h4>向量数据库的应用</h4>
+                <p>向量数据库专门用于存储和检索向量数据，在AI记忆场景中，可将文本、图像等数据转换为向量形式存储。以Milvus向量数据库为例，在处理百万级文档检索时，平均检索延迟可控制在几十毫秒内，大大提高了记忆检索效率。</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>知识图谱构建</h4>
+                <p>知识图谱以图形结构组织和表示知识，通过节点和边来描述实体及其关系。在AI记忆方面，知识图谱可以整合各种来源的数据，形成结构化的知识网络，便于AI进行推理和记忆调用。某企业构建的产品知识图谱，使客服AI在解答客户关于产品的复杂问题时，准确率从60%提升到80%。</p>
+            </div>
+            
+            <div class="stat-container">
+                <h4>不同解决方案效果对比</h4>
+                <div class="chart-container">
+                    <canvas id="solutionsChart"></canvas>
+                </div>
+            </div>
+            
+            <h3>4.3 混合解决方案</h3>
+            <ul>
+                <li><strong>分层记忆架构</strong>：结合短期记忆和长期记忆的特点，构建分层的记忆系统。短期记忆采用高速缓存存储近期高频使用的信息，长期记忆则利用向量数据库或其他持久化存储方式存储历史和低频但重要的信息。</li>
+                <li><strong>检索增强生成（RAG）</strong>：RAG将信息检索技术与生成模型相结合，在生成回答时，先从外部知识库中检索相关信息，然后将检索到的信息与输入一起作为生成模型的输入，以生成更准确、有依据的回答。</li>
+            </ul>
+        </section>
+
+        <section id="conclusion" class="section">
+            <h2>五、研究结论与展望</h2>
+            
+            <h3>5.1 研究结论总结</h3>
+            <p>本研究深入剖析了AI记忆问题，明确其在对话交互、任务执行等多方面的具体表现及对客户服务、医疗、工业等领域带来的严重影响。从技术根源看，模型架构中的上下文窗口限制、参数共享与更新策略问题，以及数据处理和存储方面的碎片化、访问速度瓶颈等，共同导致了AI记忆缺陷。</p>
+            
+            <p>现有解决方案，无论是基于模型改进（如记忆增强网络、弹性权重巩固），还是数据管理与存储优化（如向量数据库应用、知识图谱构建），亦或是混合方案（分层记忆架构、检索增强生成），虽在一定程度上缓解了AI记忆问题，但都存在各自的局限性，如计算成本高、存储维护复杂、检索精度不足等。</p>
+            
+            <h3>5.2 未来研究方向展望</h3>
+            <ol>
+                <li><strong>模拟生物记忆机制的深度探索</strong>：进一步研究人类大脑记忆的神经生物学原理，尝试在AI模型中模拟类似的记忆形成、强化和提取过程。</li>
+                <li><strong>新型存储与计算架构的研发</strong>：探索适用于AI记忆的新型存储介质和计算架构，如基于量子存储、忆阻器等新兴技术，以突破传统存储介质在容量和访问速度上的瓶颈。</li>
+                <li><strong>动态自适应记忆管理</strong>：开发能够根据任务需求、数据特征和模型运行状态动态调整记忆策略的系统。</li>
+                <li><strong>跨领域多模态记忆融合</strong>：研究如何实现跨领域和多模态记忆的有效融合，使AI能够综合利用不同领域和模态的记忆信息，提供更全面、智能的服务。</li>
+            </ol>
+            
+            <div class="highlight-box">
+                <p>通过持续深入研究，有望从根本上解决AI记忆问题，推动AI技术迈向更高的智能水平，实现更广泛、更深入的应用。</p>
+            </div>
+        </section>
+    </div>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                navLinks.classList.remove('active');
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // Impact chart
+        const impactCtx = document.getElementById('impactChart').getContext('2d');
+        new Chart(impactCtx, {
+            type: 'bar',
+            data: {
+                labels: ['客户服务', '医疗健康', '工业制造', '教育', '金融'],
+                datasets: [{
+                    label: '负面影响程度',
+                    data: [85, 92, 78, 65, 70],
+                    backgroundColor: [
+                        'rgba(142, 68, 173, 0.8)',
+                        'rgba(142, 68, 173, 0.8)',
+                        'rgba(142, 68, 173, 0.8)',
+                        'rgba(142, 68, 173, 0.6)',
+                        'rgba(142, 68, 173, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(142, 68, 173, 1)',
+                        'rgba(142, 68, 173, 1)',
+                        'rgba(142, 68, 173, 1)',
+                        'rgba(142, 68, 173, 1)',
+                        'rgba(142, 68, 173, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '影响程度 (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '应用领域'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Solutions chart
+        const solutionsCtx = document.getElementById('solutionsChart').getContext('2d');
+        new Chart(solutionsCtx, {
+            type: 'radar',
+            data: {
+                labels: ['效果', '复杂度', '成本', '实时性', '可扩展性'],
+                datasets: [{
+                    label: '模型改进方案',
+                    data: [75, 60, 55, 65, 60],
+                    backgroundColor: 'rgba(142, 68, 173, 0.2)',
+                    borderColor: 'rgba(142, 68, 173, 1)',
+                    pointBackgroundColor: 'rgba(142, 68, 173, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(142, 68, 173, 1)'
+                },
+                {
+                    label: '数据优化方案',
+                    data: [65, 70, 75, 60, 70],
+                    backgroundColor: 'rgba(114, 137, 218, 0.2)',
+                    borderColor: 'rgba(114, 137, 218, 1)',
+                    pointBackgroundColor: 'rgba(114, 137, 218, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(114, 137, 218, 1)'
+                },
+                {
+                    label: '混合解决方案',
+                    data: [80, 85, 80, 75, 85],
+                    backgroundColor: 'rgba(243, 156, 18, 0.2)',
+                    borderColor: 'rgba(243, 156, 18, 1)',
+                    pointBackgroundColor: 'rgba(243, 156, 18, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(243, 156, 18, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
