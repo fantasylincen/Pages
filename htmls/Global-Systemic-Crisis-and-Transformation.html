@@ -1,0 +1,854 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球系统性危机与变革：构建21世纪新型文明形态</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#C9CDD4',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .section-fade {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .section-fade.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    
+    <!-- 导入Inter字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-inter bg-gradient-to-b from-gray-light to-white text-dark antialiased">
+    <!-- 顶部导航栏 -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <!-- 标题 -->
+                <div class="flex items-center">
+                    <h1 class="text-lg md:text-xl font-semibold text-primary hidden sm:block">
+                        <i class="fa fa-globe mr-2"></i>全球系统性危机研究
+                    </h1>
+                </div>
+                
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#section1" class="text-sm md:text-base font-medium text-gray-dark hover:text-primary transition-colors duration-200">危机四伏</a>
+                    <a href="#section2" class="text-sm md:text-base font-medium text-gray-dark hover:text-primary transition-colors duration-200">危机根源</a>
+                    <a href="#section3" class="text-sm md:text-base font-medium text-gray-dark hover:text-primary transition-colors duration-200">变革路径</a>
+                    <a href="#section4" class="text-sm md:text-base font-medium text-gray-dark hover:text-primary transition-colors duration-200">结语</a>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button id="menuBtn" class="text-gray-dark hover:text-primary focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden bg-white shadow-md absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 pointer-events-none">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#section1" class="block py-2 text-gray-dark hover:text-primary transition-colors duration-200">危机四伏</a>
+                <a href="#section2" class="block py-2 text-gray-dark hover:text-primary transition-colors duration-200">危机根源</a>
+                <a href="#section3" class="block py-2 text-gray-dark hover:text-primary transition-colors duration-200">变革路径</a>
+                <a href="#section4" class="block py-2 text-gray-dark hover:text-primary transition-colors duration-200">结语</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-28 pb-16">
+        <!-- 封面区域 -->
+        <section class="mb-16 md:mb-24 text-center">
+            <h1 class="text-[clamp(1.8rem,5vw,2.8rem)] font-bold text-dark mb-6 leading-tight text-balance">
+                全球系统性危机与变革：构建21世纪新型文明形态
+            </h1>
+            <div class="w-24 h-1 bg-primary mx-auto mb-8 rounded-full"></div>
+            <p class="text-gray-dark text-lg md:text-xl max-w-3xl mx-auto">
+                深入分析现代社会面临的系统性挑战，探索资本主义制度的根本缺陷，
+                提出构建新型文明形态的系统性方案，迈向人类命运共同体
+            </p>
+        </section>
+
+        <!-- 第一部分：危机四伏 -->
+        <section id="section1" class="mb-20 section-fade">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                    <i class="fa fa-exclamation-triangle text-primary text-xl"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-dark">一、危机四伏：现代社会面临的系统性挑战</h2>
+            </div>
+
+            <!-- 1.1 全球贫富分化 -->
+            <div class="mb-12 bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <h3 class="text-xl md:text-2xl font-semibold text-dark mb-4 flex items-center">
+                    <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">1.1</span>
+                    全球贫富分化达到历史极值
+                </h3>
+                <div class="prose max-w-none text-gray-dark mb-6">
+                    <p class="mb-4">全球财富不平等已达到令人震惊的程度。根据2025年5月发布的《人类发展报告》，全球人类发展进程正经历35年来的最低水平，贫富国家间的差距正在持续扩大。</p>
+                    <p class="mb-4">2025年5月，福布斯发布的最新报告显示：全球前1%富豪财富占比首次突破50%，而底层50%人口仅拥有全球财富的1.2%。瑞银《2025年全球财富报告》显示，美国和中国大陆占据全球财富的主导地位，两者合计占全球财富的55%。</p>
+                </div>
+
+                <!-- 财富分布图表 -->
+                <div class="bg-gray-light rounded-lg p-4 mb-6">
+                    <h4 class="text-lg font-medium text-dark mb-3">全球财富分布情况（2025）</h4>
+                    <div class="h-64 md:h-72">
+                        <canvas id="wealthDistributionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none text-gray-dark">
+                    <p>更令人担忧的是，资本回报率的增速已达到工资增速的3倍，这种"资本吸血效应"正在制造多维度的社会断层。在教育领域，高收入家庭课外教育支出是低收入家庭的8倍，中国重点大学农村学生比例从1978年的30%暴跌至2023年的17%。</p>
+                </div>
+            </div>
+
+            <!-- 1.2 气候危机 -->
+            <div class="mb-12 bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <h3 class="text-xl md:text-2xl font-semibold text-dark mb-4 flex items-center">
+                    <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">1.2</span>
+                    气候危机突破临界点
+                </h3>
+                <div class="prose max-w-none text-gray-dark mb-6">
+                    <p class="mb-4">气候变化已成为威胁人类生存的重大挑战。2025年1月，全球平均地表气温达到13.23°C，比工业化前水平升高了1.75°C，成为历史上最热的1月份，突破《巴黎协定》设定的1.5°C目标。</p>
+                    <p class="mb-4">极端天气事件频发，2025年夏季，英国、日本、韩国经历了有记录以来"最热夏天"。北极地区的变暖速度尤为惊人，预计未来五个长冬季北极升温幅度将达到全球平均水平的三倍半以上。</p>
+                </div>
+
+                <!-- 气温变化图表 -->
+                <div class="bg-gray-light rounded-lg p-4 mb-6">
+                    <h4 class="text-lg font-medium text-dark mb-3">全球气温变化趋势</h4>
+                    <div class="h-64 md:h-72">
+                        <canvas id="temperatureChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none text-gray-dark">
+                    <p>全球能源相关的甲烷排放问题也日益严重。国际能源署报告指出，化石燃料行业的甲烷排放占人类活动甲烷排放的近三分之一；石油、天然气和煤炭产量创新高，且减排措施有限，导致化石燃料行业每年的排放量都保持在1.2亿吨以上。</p>
+                </div>
+            </div>
+
+            <!-- 1.3 民主制度面临资本侵蚀 -->
+            <div class="mb-12 bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <h3 class="text-xl md:text-2xl font-semibold text-dark mb-4 flex items-center">
+                    <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">1.3</span>
+                    民主制度面临资本侵蚀
+                </h3>
+                <div class="prose max-w-none text-gray-dark mb-6">
+                    <p class="mb-4">资本主义社会的民主制度正面临严峻挑战，其中最突出的问题是资本对政治的操控。2025年，美国大选总花费突破150亿美元，创历史新高，政策更倾向于保护大企业与富人利益。</p>
+                </div>
+
+                <!-- 游说支出图表 -->
+                <div class="bg-gray-light rounded-lg p-4 mb-6">
+                    <h4 class="text-lg font-medium text-dark mb-3">2025年主要行业政治游说支出</h4>
+                    <div class="h-64 md:h-72">
+                        <canvas id="lobbyingChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none text-gray-dark">
+                    <p class="mb-4">在气候政策领域，资本对政治的影响尤为明显。化石燃料游说集团的影响力巨大，2025年全球油气行业游说支出达2.1亿美元，阻碍《全球塑料条约》通过。</p>
+                    <p>欧盟也面临类似问题。虽然欧洲公司加大了对气候行动的游说力度，但行业协会的行动步伐落后于单个企业。立场一致或部分一致的行业协会比例从2019年的2%上升至2025年的12%，远低于持类似支持立场的企业比例。</p>
+                </div>
+            </div>
+
+            <!-- 1.4 公共服务市场化陷阱 -->
+            <div class="mb-12 bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <h3 class="text-xl md:text-2xl font-semibold text-dark mb-4 flex items-center">
+                    <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">1.4</span>
+                    公共服务市场化陷阱
+                </h3>
+                <div class="prose max-w-none text-gray-dark">
+                    <p class="mb-4">资本主义社会中，公共服务市场化已成为一个严重问题。医疗、教育、住房等"基本民生领域"被资本渗透后，逐渐脱离"公共属性"，转而追求利润最大化。以美国为例，其医疗体系因资本垄断，人均医疗支出是其他发达国家的2-3倍，但国民预期寿命却低于OECD平均水平。</p>
+                    <p class="mb-4">教育领域同样面临市场化陷阱。中国重点大学农村学生比例从1978年的30%暴跌至2023年的17%，而高收入家庭课外教育支出是低收入家庭的8倍。这种教育资源的不平等分配，进一步加剧了社会阶层的固化。</p>
+                    <p>住房问题在全球范围内普遍存在。部分国家住房被资本炒作，导致年轻人"买房难"，沦为"房奴"。资本将"价值"简化为"货币价值"，导致教育、医疗、艺术等公共领域或精神领域被商业化。</p>
+                </div>
+            </div>
+
+            <!-- 1.5 周期性经济危机与债务陷阱 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <h3 class="text-xl md:text-2xl font-semibold text-dark mb-4 flex items-center">
+                    <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">1.5</span>
+                    周期性经济危机与债务陷阱
+                </h3>
+                <div class="prose max-w-none text-gray-dark mb-6">
+                    <p class="mb-4">资本主义经济的内在不稳定性导致周期性经济危机频发。2008年金融危机后，各国政府采取了大规模刺激措施，但这些措施并未解决根本问题，反而导致全球债务水平持续攀升。</p>
+                </div>
+
+                <!-- 债务水平图表 -->
+                <div class="bg-gray-light rounded-lg p-4 mb-6">
+                    <h4 class="text-lg font-medium text-dark mb-3">主要经济体政府债务/GDP比率（2025）</h4>
+                    <div class="h-64 md:h-72">
+                        <canvas id="debtChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none text-gray-dark">
+                    <p class="mb-4">国际货币基金组织预测全球公共债务/GDP比率将达到95.1%，2030年可能进一步上升至99.6%。大部分发达国家的政府债务率水平都很高，最高的如日本，超过250%，美国也不低，大约为125%。</p>
+                    <p>与此同时，资本主义经济的周期性波动导致就业不稳定，特别是在当前AI和自动化技术快速发展的背景下，就业市场的结构性问题日益突出。自动化与AI的普及，让低技能岗位以每年12%的速度消失。经济学家警告："AI创造的财富80%流入资本账户，劳动者仅分得残羹"。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二部分：危机根源 -->
+        <section id="section2" class="mb-20 section-fade">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                    <i class="fa fa-search text-primary text-xl"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-dark">二、危机根源：资本主义制度的系统性缺陷</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 2.1 生产社会化与生产资料私人占有之间的矛盾 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">2.1</span>
+                        生产社会化与生产资料私人占有之间的矛盾
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark">
+                        <p class="mb-4">资本主义社会的根本矛盾在于生产的社会化与生产资料的私人占有之间的对立。这一矛盾导致了一系列不可调和的系统性问题，包括经济危机、贫富分化、环境破坏等。</p>
+                        <p>这一根本矛盾表现为不断扩大的生产规模与相对狭小的消费市场之间的冲突。为追求利润最大化，资本会不断扩大生产规模，但劳动者工资增长滞后于生产扩张，导致"生产过剩"与"消费不足"的矛盾，最终引发经济危机。</p>
+                    </div>
+                </div>
+
+                <!-- 2.2 资本积累的内在逻辑与无限扩张的冲动 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">2.2</span>
+                        资本积累的内在逻辑与无限扩张的冲动
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark">
+                        <p class="mb-4">资本的本质是追求增值，这一内在逻辑导致了资本无限扩张的冲动。马克思在《资本论》中指出，资本是"死劳动"，它像吸血鬼一样，必须吸收活劳动才能生存和增值。</p>
+                        <p>资本积累的过程必然导致贫富分化。正如托马斯·皮凯蒂在《21世纪资本论》中所揭示的，当资本回报率高于经济增长率时，财富分配的不平等就会加剧。数据显示，全球资本回报率增速已达工资增速的3倍。</p>
+                    </div>
+                </div>
+
+                <!-- 2.3 劳动异化与人类价值的商品化 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">2.3</span>
+                        劳动异化与人类价值的商品化
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark">
+                        <p class="mb-4">在资本主义制度下，劳动异化是一个普遍现象。马克思指出，劳动异化表现为劳动者与劳动产品、劳动过程、劳动本质以及人与人之间的异化。</p>
+                        <p class="mb-4">劳动者沦为"资本增值的工具"，工作失去"创造价值的意义"，转而成为"谋生的被迫手段"。例如，流水线工人重复机械劳动、零工经济从业者被算法压榨劳动时间。</p>
+                        <p>更为严重的是，资本主义将一切价值都简化为商品价值，导致人类社会的核心价值被扭曲。教育、医疗、艺术等原本具有公共属性或精神属性的领域被商业化。</p>
+                    </div>
+                </div>
+
+                <!-- 2.4 资本对政治权力的渗透与控制 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">2.4</span>
+                        资本对政治权力的渗透与控制
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark">
+                        <p class="mb-4">资本与政治权力的结合是资本主义社会的一个显著特征。资本通过政治献金、游说集团、媒体垄断等方式影响政策，使"民主"沦为"资本的工具"。</p>
+                        <p class="mb-4">以美国为例，"联合公民诉联邦选举委员会案"后，企业政治献金限制被取消，2024年美国大选总花费突破150亿美元，政策更倾向于保护大企业与富人利益。</p>
+                        <p>资本对政治的控制不仅表现在选举过程中，还表现在政策制定和执行的各个环节。例如，化石燃料行业通过游说活动，成功阻止了许多国家采取强有力的气候政策。</p>
+                    </div>
+                </div>
+
+                <!-- 2.5 全球化与全球治理体系的结构性缺陷 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md md:col-span-2">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">2.5</span>
+                        全球化与全球治理体系的结构性缺陷
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark">
+                        <p class="mb-4">全球化是资本主义发展的必然结果，但当前的全球化进程存在严重的结构性缺陷。一方面，全球化加剧了全球范围内的不平等，富者愈富，穷者愈穷；另一方面，全球治理体系未能适应全球化的需要，导致全球公共品供给不足，无法有效应对气候变化、跨国犯罪、公共卫生等全球性挑战。</p>
+                        <p>联合国《2025全球发展报告》尖锐指出：资本流动的自由化与人类发展的公平性，已形成前所未有的时代张力。在这种情况下，全球治理体系的改革已成为迫切需要。然而，当前的全球治理体系仍然由发达国家主导，发展中国家的声音和利益得不到充分体现，这使得全球治理的效果大打折扣。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三部分：变革路径 -->
+        <section id="section3" class="mb-20 section-fade">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                    <i class="fa fa-road text-primary text-xl"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-dark">三、变革路径：构建新文明形态的系统性方案</h2>
+            </div>
+
+            <!-- 3.1 重塑生产资料所有制结构 -->
+            <div class="mb-12 bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <h3 class="text-xl md:text-2xl font-semibold text-dark mb-4 flex items-center">
+                    <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">3.1</span>
+                    重塑生产资料所有制结构
+                </h3>
+                <div class="prose max-w-none text-gray-dark mb-6">
+                    <p class="mb-4">要从根本上解决资本主义社会的系统性问题，必须重塑生产资料所有制结构。这并不意味着完全废除私有制，而是要建立一种以公有制为主体、多种所有制经济共同发展的混合所有制经济。</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-gray-light rounded-lg p-5">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                            <i class="fa fa-building text-primary text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-medium text-dark mb-2">强化公有制主体地位</h4>
+                        <p class="text-gray-dark text-sm">中国通过国有企业掌控关键领域，2025年央企研发投入占全国企业总投入的38%，在芯片、新能源等领域实现技术突破。</p>
+                    </div>
+                    <div class="bg-gray-light rounded-lg p-5">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                            <i class="fa fa-random text-primary text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-medium text-dark mb-2">发展混合所有制经济</h4>
+                        <p class="text-gray-dark text-sm">贵州高寨村通过"村集体控股70%+村民持股30%"的模式，发展辣椒产业实现年收益48万元，村民人均分红1200元。</p>
+                    </div>
+                    <div class="bg-gray-light rounded-lg p-5">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                            <i class="fa fa-users text-primary text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-medium text-dark mb-2">探索劳动者所有制</h4>
+                        <p class="text-gray-dark text-sm">德国"共决制度"要求企业监事会中职工代表占比50%，大众汽车通过劳资协商实现电动化转型，保障就业并提升创新效率。</p>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none text-gray-dark">
+                    <p>未来可立法强制上市公司将10%-20%股权转为职工持股基金，使劳动者成为资本增值的直接受益者。这种多元化的所有制结构既能保持经济活力，又能防止资本过度集中和垄断。</p>
+                </div>
+            </div>
+
+            <!-- 3.2 重构分配体系，实现共同富裕 -->
+            <div class="mb-12 bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <h3 class="text-xl md:text-2xl font-semibold text-dark mb-4 flex items-center">
+                    <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">3.2</span>
+                    重构分配体系，实现共同富裕
+                </h3>
+                <div class="prose max-w-none text-gray-dark mb-6">
+                    <p class="mb-4">分配体系的重构是解决贫富分化问题的关键。当前的分配体系严重偏向资本所有者，导致财富越来越集中在少数人手中。重构分配体系需要从初次分配、再分配和三次分配三个层面入手。</p>
+                </div>
+
+                <!-- 分配体系图表 -->
+                <div class="bg-gray-light rounded-lg p-4 mb-6">
+                    <h4 class="text-lg font-medium text-dark mb-3">收入分配改革路径</h4>
+                    <div class="h-64 md:h-72">
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none text-gray-dark">
+                    <p class="mb-4">在初次分配层面，通过《最低工资法》和行业集体谈判，确保劳动报酬增长与生产率同步。德国2025年最低工资提升至12欧元/小时，北欧工会覆盖率超70%。</p>
+                    <p class="mb-4">在再分配层面，实施"累进财富税"和遗产税，打破财富代际传递。瑞典52%的最高边际税率支撑起全民终身教育体系，其基尼系数0.26堪称社会稳定的压舱石。</p>
+                    <p>在三次分配层面，鼓励慈善捐赠并给予税收优惠，同时推动建立更加透明和有效的慈善机制。浙江与攀枝花的"共富试验"通过土地入市、数据分红等制度，使农民财产性收入三年增长240%。</p>
+                </div>
+            </div>
+
+            <!-- 3.3-3.6 其他变革路径 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- 3.3 革新经济治理模式 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">3.3</span>
+                        革新经济治理模式
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark text-sm">
+                        <p class="mb-3">构建国家战略导向的市场经济，中国"五年规划"通过产业政策引导资源配置，2025年"新基建"投资达15万亿元，带动数字经济占GDP比重超45%。</p>
+                        <p class="mb-3">强化反垄断与公平竞争，中国2025年修订《反垄断法》，对平台企业实施"数据可携带权"和"开放生态系统"强制令。</p>
+                        <p>建立数字经济公共治理体系，新加坡推出"数字主权账户"，公民可自主决定个人数据的使用权限并获得收益分成。</p>
+                    </div>
+                </div>
+
+                <!-- 3.4 推动技术革命与生产方式变革 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">3.4</span>
+                        推动技术革命与生产方式变革
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark text-sm">
+                        <p class="mb-3">构建公共技术创新体系，美国"国防高级研究计划局"模式证明，政府主导的基础研究能催生颠覆性创新。</p>
+                        <p class="mb-3">实施人机协作革命，日本"劳动方式改革"要求企业限制加班并推广弹性工作制，同时投资机器人替代重复性劳动，使制造业劳动生产率提升23%。</p>
+                        <p>发展共享经济公有制，巴黎"共享汽车合作社"由市政府控股51%，市民支付会员费即可使用车辆，利润用于扩大服务网络。</p>
+                    </div>
+                </div>
+
+                <!-- 3.5 变革政治制度 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">3.5</span>
+                        变革政治制度，实现真正的人民民主
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark text-sm">
+                        <p class="mb-3">实施政治献金透明化，美国"阳光法案"要求政治献金实时公开并限制单笔捐赠额度，同时禁止企业直接参与政治游说。</p>
+                        <p class="mb-3">建立经济民主制度，瑞典"雇员投资基金"要求企业将20%利润注入公共基金，基金再投资于战略产业，使劳动者间接掌控资本分配权。</p>
+                        <p>推动跨国经济治理，欧盟"碳边境调节机制"对进口商品征收碳税，2025年预计征收200亿欧元，倒逼全球产业链低碳转型。</p>
+                    </div>
+                </div>
+
+                <!-- 3.6 构建新型全球治理体系 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 transition-transform duration-300 hover:shadow-md">
+                    <h3 class="text-xl font-semibold text-dark mb-4 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-primary/20 text-primary text-center leading-8 mr-3 text-sm">3.6</span>
+                        构建新型全球治理体系
+                    </h3>
+                    <div class="prose max-w-none text-gray-dark text-sm">
+                        <p class="mb-3">改革国际金融机构，增加发展中国家的代表性和话语权，建立更加包容、透明、有效的全球金融治理机制。</p>
+                        <p class="mb-3">加强全球气候治理，各国应加强减排承诺，落实"国家自主贡献"，同时建立更加公平的气候资金机制，帮助发展中国家应对气候变化。</p>
+                        <p>推动全球发展合作，国际社会需要加强合作，推动全球发展体系突破长期停滞困境，实现包容性增长，避免2030年发展目标推迟数十年。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第四部分：结语 -->
+        <section id="section4" class="section-fade">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                    <i class="fa fa-flag-checkered text-primary text-xl"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-dark">四、结语：迈向人类命运共同体</h2>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 transition-transform duration-300 hover:shadow-md">
+                <div class="prose max-w-none text-gray-dark">
+                    <p class="mb-4">资本主义社会的系统性危机已经表明，传统的发展模式不可持续。面对全球贫富分化、气候变化、生态危机、政治腐败等一系列挑战，人类社会需要一种新的文明形态。</p>
+                    
+                    <p class="mb-4">这种新的文明形态应该是以人的全面发展为中心，以人与自然和谐共生为基础，以共建共享为原则的人类命运共同体。在这一文明形态中，生产资料所有制结构更加合理，分配体系更加公平，经济治理更加有效，政治制度更加民主，全球治理更加包容。</p>
+                    
+                    <p class="mb-4">构建这一新文明形态是一个长期而艰巨的过程，需要各国政府、企业、社会组织和个人的共同努力。我们需要超越资本主义和社会主义的简单对立，吸收人类文明的一切优秀成果，探索一条符合本国国情、顺应时代潮流的发展道路。</p>
+                    
+                    <p class="mb-4">正如马克思所指出的，人类社会的发展是一个自然历史过程，资本主义社会必然被更高级的社会形态所取代。今天，我们正站在这一历史转折点上，有责任也有能力推动这一历史进程，创造一个更加公平、更加美好、更加可持续的未来。</p>
+                    
+                    <p class="italic text-primary font-medium">让我们携手同心，共同构建人类命运共同体，迈向一个没有剥削、没有压迫、人人平等、共同富裕的美好社会。这不仅是可能的，也是必要的，更是我们这一代人的历史使命。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-semibold mb-2">全球系统性危机与变革研究</h3>
+                    <p class="text-gray-medium text-sm">构建21世纪新型文明形态的探索与思考</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#section1" class="text-gray-medium hover:text-white transition-colors duration-200">
+                        <i class="fa fa-arrow-up mr-1"></i>返回顶部
+                    </a>
+                    <a href="#" class="text-gray-medium hover:text-white transition-colors duration-200">
+                        <i class="fa fa-file-text-o mr-1"></i>完整报告
+                    </a>
+                    <a href="#" class="text-gray-medium hover:text-white transition-colors duration-200">
+                        <i class="fa fa-share-alt mr-1"></i>分享
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-dark mt-8 pt-8 text-center text-gray-medium text-sm">
+                <p>© 2025 全球系统性危机研究项目组. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('shadow-sm');
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('shadow-sm');
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+            
+            // 检测元素是否在视口中，用于淡入效果
+            const sections = document.querySelectorAll('.section-fade');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.85) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+        
+        // 移动端菜单
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', function() {
+            if (mobileMenu.classList.contains('opacity-0')) {
+                mobileMenu.classList.remove('opacity-0', '-translate-y-full', 'pointer-events-none');
+                mobileMenu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                menuBtn.innerHTML = '<i class="fa fa-times text-xl"></i>';
+            } else {
+                mobileMenu.classList.add('opacity-0', '-translate-y-full', 'pointer-events-none');
+                mobileMenu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                menuBtn.innerHTML = '<i class="fa fa-bars text-xl"></i>';
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动端菜单（如果打开）
+                if (mobileMenu.classList.contains('opacity-100')) {
+                    mobileMenu.classList.add('opacity-0', '-translate-y-full', 'pointer-events-none');
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                    menuBtn.innerHTML = '<i class="fa fa-bars text-xl"></i>';
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 返回顶部按钮
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 图表初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 财富分布图表
+            const wealthDistributionCtx = document.getElementById('wealthDistributionChart').getContext('2d');
+            new Chart(wealthDistributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['全球前1%富豪', '全球前1%-10%', '全球前10%-50%', '全球底层50%'],
+                    datasets: [{
+                        data: [50, 30, 18.8, 1.2],
+                        backgroundColor: [
+                            '#165DFF',
+                            '#36CFC9',
+                            '#722ED1',
+                            '#F53F3F'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+            
+            // 气温变化图表
+            const temperatureCtx = document.getElementById('temperatureChart').getContext('2d');
+            new Chart(temperatureCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1850-1900', '1950', '1980', '2000', '2015', '2025', '2030(预测)'],
+                    datasets: [{
+                        label: '全球平均气温相对于工业化前水平(°C)',
+                        data: [0, 0.5, 0.8, 1.0, 1.2, 1.75, 1.9],
+                        borderColor: '#F53F3F',
+                        backgroundColor: 'rgba(245, 63, 63, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#F53F3F',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }, {
+                        label: '《巴黎协定》1.5°C目标',
+                        data: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+                        borderColor: '#165DFF',
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '温度变化(°C)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '年份'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 游说支出图表
+            const lobbyingCtx = document.getElementById('lobbyingChart').getContext('2d');
+            new Chart(lobbyingCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['油气行业', '制药行业', '科技行业', '金融行业', '军工行业'],
+                    datasets: [{
+                        label: '2025年政治游说支出(亿美元)',
+                        data: [2.1, 1.8, 1.5, 1.3, 1.1],
+                        backgroundColor: [
+                            '#F53F3F',
+                            '#FF7D00',
+                            '#165DFF',
+                            '#722ED1',
+                            '#36CFC9'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '支出(亿美元)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '行业'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 债务水平图表
+            const debtCtx = document.getElementById('debtChart').getContext('2d');
+            new Chart(debtCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['日本', '意大利', '美国', '法国', '英国', '德国', '全球平均'],
+                    datasets: [{
+                        label: '政府债务/GDP比率(%)',
+                        data: [253, 158, 125, 112, 103, 68, 95.1],
+                        backgroundColor: '#165DFF',
+                        borderRadius: 4
+                    }, {
+                        label: '2030年预测(%)',
+                        data: [265, 165, 135, 120, 110, 72, 99.6],
+                        backgroundColor: '#36CFC9',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '债务/GDP比率(%)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '国家/地区'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 分配体系图表
+            const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+            new Chart(distributionCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '劳动报酬占比',
+                        '社会保障覆盖',
+                        '教育资源公平',
+                        '医疗资源公平',
+                        '财富税力度',
+                        '遗产税覆盖'
+                    ],
+                    datasets: [{
+                        label: '当前资本主义体系',
+                        data: [35, 45, 30, 25, 15, 10],
+                        backgroundColor: 'rgba(245, 63, 63, 0.2)',
+                        borderColor: '#F53F3F',
+                        pointBackgroundColor: '#F53F3F',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#F53F3F'
+                    }, {
+                        label: '理想分配体系',
+                        data: [65, 90, 85, 80, 75, 70],
+                        backgroundColor: 'rgba(22, 93, 255, 0.2)',
+                        borderColor: '#165DFF',
+                        pointBackgroundColor: '#165DFF',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#165DFF'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+            
+            // 初始触发一次滚动事件，以正确设置元素状态
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>
